@@ -1,12 +1,12 @@
 import Navbar from './components/Navbar';
-import Queue from './components/Queue';
+import System from './components/System';
 
 export default function Home() {
   return (
     <div className='flex min-h-screen flex-col'>
       <Navbar />
       <main className='flex lg:flex-row flex-col-reverse gap-4 lg:flex-1 m-4'>
-        <Queue />
+        <System />
         <aside className='flex-1'>
           <article className='p-4 text-center bg-white space-y-4 rounded-md'>
             <header className='space-y-1'>
