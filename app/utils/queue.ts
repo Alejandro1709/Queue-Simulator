@@ -49,5 +49,39 @@ export default class Queue<ITicket> {
     return ++this.size;
   }
 
-  public dequeue() {}
+  public dequeue(): ITicket | null {
+    if (!this.first) return null;
+
+    let node = this.first;
+
+    if (this.first === this.last) {
+      this.last = undefined;
+    }
+
+    this.first.setValue(this.first.getValue());
+    this.size--;
+
+    return node.getValue();
+  }
+
+  public getSize(): number {
+    return this.size;
+  }
+
+  public toArray(): ITicket[] {
+    if (!this.first) return [];
+
+    let result: ITicket[] = [];
+
+    let current = this.first;
+
+    while (current !== null) {
+      if (current) {
+        result.push(current.getValue());
+        current = current.getNext()!;
+      } else break;
+    }
+
+    return result;
+  }
 }
