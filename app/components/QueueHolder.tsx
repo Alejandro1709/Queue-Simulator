@@ -1,10 +1,23 @@
+'use client';
+import { useEffect, useState } from 'react';
+import { generateTickets } from '../utils/generator';
+import Queue from '../utils/queue';
 import type ITicket from '../types/ticket';
 
-type QueueProps = {
-  tickets: ITicket[];
-};
+function QueueHolder() {
+  const [queue, setQueue] = useState(new Queue<ITicket>());
 
-function Queue({ tickets }: QueueProps) {
+  const tickets = queue.toArray();
+
+  const configureQueue = async () => {
+    const queue = await generateTickets(new Queue<ITicket>());
+    setQueue(queue);
+  };
+
+  useEffect(() => {
+    configureQueue();
+  }, []);
+
   return (
     <ul className='flex flex-col border'>
       {tickets.map((ticket) => (
@@ -27,4 +40,4 @@ function Queue({ tickets }: QueueProps) {
   );
 }
 
-export default Queue;
+export default QueueHolder;
